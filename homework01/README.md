@@ -1,37 +1,48 @@
-# ZoomCamp 2026 – Homework 01 (Green Taxi Analysis)
+# Data Engineering ZoomCamp 2026 – Homework 01 (Green Taxi Analysis)
 
-This project contains the solution for Homework 01 of the Data Engineering ZoomCamp 2026.
-The analysis is performed using Python (pandas) inside a Docker + Docker Compose environment to ensure reproducibility.
+This repository contains the solution for **Homework 01** of the [Data Engineering ZoomCamp 2026]. The project analyzes Green Taxi trip data from **November 2025** using Python (pandas) within a Dockerized environment to ensure full reproducibility.
 
-Overview:
-The homework analyzes the Green Taxi trips dataset for November 2025 by reading Parquet data,
-applying filters and aggregations with pandas, and running everything inside a Docker container.
+---
 
-Project Structure:
-homework01/green_taxi
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
+## Overview
+The analysis involves reading Parquet data, performing complex merges with taxi zone lookups, and calculating trip statistics (such as identifying high-tip destinations). All processes are encapsulated within a Docker container.
+
+---
+
+## Project Structure
+```text
+homework01/green_taxi/
 ├── src/
-│   └── main.py
-└── data/
-    ├── green_tripdata_2025-11.parquet
-    └── taxi_zone_lookup.csv
+│   └── main.py             # Analysis script (Pandas logic)
+├── data/
+│   ├── green_tripdata_2025-11.parquet
+│   └── taxi_zone_lookup.csv
+├── Dockerfile              # Docker image configuration
+├── docker-compose.yml      # Orchestration for the app
+├── requirements.txt        # Python library dependencies
+└── README.md               # Documentation
+```
 
-Clone the Repository:
-git clone https://github.com/muhammadbonn/ZoomCamp-2026.git
+### Getting Started
+1. Clone the Repository
+```
+git clone https://github.com
 cd ZoomCamp-2026/homework01/green_taxi
-
-Build the Docker Image:
+```
+2. Build the Docker Image
+```
 docker compose build --no-cache
-
-Run the Analysis:
+```
+3. Run the Analysis
+```
 docker compose run --rm app
-
-Or run interactively:
-docker compose up
+```
+Or run interactively (Bash):
+```
+docker compose up -d
 docker compose exec app bash
 python src/main.py
+```
 
-Reference:
-https://github.com/DataTalksClub/data-engineering-zoomcamp
+
+
