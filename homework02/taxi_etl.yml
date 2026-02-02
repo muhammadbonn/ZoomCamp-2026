@@ -1,0 +1,36 @@
+id: taxis_etl
+namespace: zoomcamp
+
+inputs:
+  - id: taxi
+    type: ENUM
+    required: true
+    defaults: green
+    values:
+      - green
+      - yellow
+
+  - id: year
+    type: STRING
+    required: true
+
+  - id: month
+    type: STRING
+    required: true
+
+variables:
+  file: "{{ inputs.taxi }}_tripdata_{{ inputs.year }}-{{ inputs.month }}.csv"
+  url: "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/{{ inputs.taxi }}/{{ vars.file }}.gz"
+
+tasks:
+  - id: extract
+    type: io.kestra.plugin.scripts.shell.Commands
+    commands:
+      - wget -O {{ vars.file }}.gz {{ vars.url }}
+      - gunzip {{ vars.file }}.gz
+
+  - id: info
+    type: io.kestra.plugin.scripts.shell.Commands
+    commands:
+      - echo "File is {{ vars.file }}"
+      - wc -l {{ vars.file }}
