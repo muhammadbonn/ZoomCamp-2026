@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: fct_trips
+    description: "Fact table for all taxi trips"
+    columns:
+      - name: pickup_datetime
+        description: "Pickup timestamp should never be null"
+        tests:
+          - not_null
+
+      - name: dropoff_datetime
+        description: "Dropoff timestamp should never be null"
+        tests:
+          - not_null
+
+      - name: payment_type
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+
